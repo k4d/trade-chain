@@ -1,0 +1,14 @@
+# Dependency directories
+/node_modules
+
+# Build artifacts
+/dist
+/build
+
+# Environment variables
+.env
+
+# IDE and system files
+.astro
+.idx
+.vscode
