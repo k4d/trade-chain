@@ -1,40 +1,91 @@
-# Astro + React Example
+---
+
+# Trade Chain
 
 ## About the Project
 
-This project is a web application built with Astro. It focuses on creating a user-friendly interface for managing trade chains. The application utilizes modern web technologies to provide a responsive and efficient experience.
+This project is a web application built with [Astro](https://astro.build), [React](https://reactjs.org) and [Tailwind CSS](https://tailwindcss.com), designed to provide an intuitive interface for managing trade chains.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
-The project is structured as follows:
+Here's an overview of the main directories and files:
 
-- `/public`: This directory contains static assets that will be served directly by the web server. This includes files like `/public/favicon.svg`.
-- `/src`: This is the main source directory for the application.
-  - `/src/pages`: This directory contains the `.astro` files that represent the pages of the application. Each `.astro` file in this directory corresponds to a route. For example, `/src/pages/index.astro` is the homepage.
-  - `/src/layouts`: This directory contains `.astro` files that are used as layouts for pages, providing a consistent structure and design. For example, `/src/layouts/Layout.astro`.
-  - `/src/styles`: This directory contains global styles for the application, such as `/src/styles/global.css`.
-- `/astro.config.mjs`: This is the main configuration file for Astro.
-- `/package.json`: This file manages the project's dependencies and scripts.
-- `/tsconfig.json`: This file is the configuration for TypeScript, if used in the project.
-
----
-
-## Technologies Used
-
-This project is built using Astro, a modern static site builder, and utilizes React for component development.
-
----
-
-```sh
-npm create astro@latest -- --template framework-react
+```
+/project-root
+├── /public             # Static assets (e.g., images, fonts, favicon)
+├── /src                # Source code
+│   ├── /components     # Reusable components
+│   │   ├── /ui         # UI components
+│   │   └── /features   # Feature-specific components
+│   ├── /layouts        # Layout templates used across pages
+│   ├── /pages          # Astro pages — each file maps to a route
+│   ├── /styles         # Global styles and CSS files
+│   ├── /utils          # Utility functions and helpers
+├── /astro.config.mjs   # Astro configuration
+├── package.json        # Project dependencies and scripts
+├── tsconfig.json       # TypeScript configuration (optional)
+└── README.md           # Description of the project and its features
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/framework-react)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/framework-react)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/framework-react/devcontainer.json)
+---
 
-This example showcases Astro working with [React](https://react.dev).
+## 🛠 Technologies Used
 
-Write your React components as `.jsx` or `.tsx` files in your project.
+- **[Astro](https://astro.build)** – A modern static site builder that supports multiple frameworks.
+- **[React](https://reactjs.org)** – For building interactive UI components.
+- **[Tailwind CSS](https://tailwindcss.com)** – Utility-first CSS framework for styling.
+- **TypeScript** *(optional)* – For type-safe development.
+- **Markdown & MDX** *(optional)* – For writing documentation or blog content.
+
+---
+
+## ✨ Features Implemented
+
+- Responsive layout using Tailwind CSS
+- Reusable `Typography`, `Link`, and `NavLink` components
+- Clean global styles with custom font setup
+- Separated **UI components** (`/components/ui`) from **feature components** (`/components/features`)
+
+---
+
+## 🧪 Development Setup
+
+To run this project locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:4321](http://localhost:4321) in your browser to view it.
+
+---
+
+## 🚀 Deployment
+
+You can deploy the project using any static hosting service such as:
+- Vercel
+
+Use the build command:
+
+```bash
+npm run build
+```
+
+---
+
+## 🧩 Future Improvements
+
+- Add integration with real-time crypto data (e.g., CoinGecko API)
+- Add unit tests for components
+- Create Storybook documentation for UI components
+
+---
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+---
