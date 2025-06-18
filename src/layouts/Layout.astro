@@ -1,4 +1,23 @@
 ---
+/**
+ * Base layout component for pages with header, footer and main content area.
+ *
+ * @component
+ * @example
+ * ---
+ * title: "Crypto Explorer"
+ * description: "Explore real-time crypto prices and data"
+ * ---
+ *
+ * <Layout>
+ *   <h1>Crypto Dashboard</h1>
+ * </Layout>
+ *
+ * @interface
+ * @property {string} title - The page title shown in the browser tab
+ * @property {string} [description] - Optional SEO-friendly page description
+ */
+
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -22,14 +41,19 @@ const {
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Source+Sans+Pro:wght@100;200;300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body class="bg-gray-100 min-h-screen flex flex-col">
 		<Header />
-		<div class="flex-grow">
-			<main class="container mx-auto">
-				<slot />
-			</main>
-		</div>
+		<main class="flex-grow container mx-auto pt-5 pb-5">
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

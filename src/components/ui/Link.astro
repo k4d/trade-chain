@@ -1,0 +1,29 @@
+---
+/* Component UI <Link> */
+/**
+ * A reusable anchor (link) component with support for href, title, and custom classes.
+ *
+ * @component
+ * @example
+ * <Link href="/about" title="About us" class="text-blue-500 hover:underline">
+ *   Learn more
+ * </Link>
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.href - The URL the link points to
+ * @param {string} [props.title] - Optional title attribute for accessibility or tooltip
+ * @param {string} [props.class] - Optional custom CSS/Tailwind classes
+ */
+
+interface Props {
+	href: string;
+	title?: string;
+	class?: string;
+}
+
+const { href, title, class: className } = Astro.props;
+---
+
+<a href={href} title={title} class={className}>
+	<slot />
+</a>

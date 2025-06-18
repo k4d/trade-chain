@@ -1,0 +1,29 @@
+---
+/**
+ * Header component for displaying a title and optional description.
+ *
+ * @component
+ * @example
+ * <Header title="Dashboard" description="Overview of your trading performance." />
+ *
+ * @interface
+ * @property {string} [title] - Optional title shown at the top (default: "TradeChain")
+ * @property {string} [description] - Optional descriptive text below the title
+ */
+
+import Typography from "./ui/Typography.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = "TradeChain", description = "" } = Astro.props;
+---
+
+<div>
+	<Typography variant="h4">{title}</Typography>
+	<Typography variant="lead" class="font-thin text-blue-200">
+		{description}
+	</Typography>
+</div>

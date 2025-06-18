@@ -1,0 +1,102 @@
+---
+/* Component UI <Typography> */
+/**
+ * Typography component for rendering text with different styles and optional gradient effect.
+ *
+ * @component
+ * @example
+ * <Typography variant="h1" gradient="gradient-blue">Heading</Typography>
+ * // → Renders a styled h1 with blue gradient text
+ *
+ * @param {Object} props - Component props
+ * @param {'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'display-1'|'display-2'|'display-3'|'display-4'|'display-5'|'display-6'|'lead'} props.type - The variant of typography
+ * @param {'gradient'|'gradient-blue'|'gradient-green'|'gradient-red'} [props.gradient] - Optional gradient style
+ * @param {string} [props.class] - Additional custom Tailwind classes
+ */
+
+import { cx } from "../../utils/utils";
+
+/**
+ * The variant of typography.
+ * Can be 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+ * 'display-1', 'display-2', 'display-3', 'display-4', 'display-5', 'display-6'
+ * or 'lead'.
+ */
+type VariantValue =
+	| "h1"
+	| "h2"
+	| "h3"
+	| "h4"
+	| "h5"
+	| "h6"
+	| "display-1"
+	| "display-2"
+	| "display-3"
+	| "display-4"
+	| "display-5"
+	| "display-6"
+	| "lead";
+
+/* Optional gradient style for the text */
+type GradientValue =
+	| "gradient"
+	| "gradient-blue"
+	| "gradient-green"
+	| "gradient-red";
+
+interface Props {
+	variant: VariantValue;
+	gradient?: GradientValue;
+	class?: string;
+}
+
+const { variant, class: className, gradient } = Astro.props;
+
+/* Define the base HTML tag and Tailwind classes for each type */
+const typographyMap: { [key: string]: { tag: string; classes: string } } = {
+	h1: { tag: "h1", classes: "text-5xl font-bold" }, // Пример классов Tailwind
+	h2: { tag: "h2", classes: "text-4xl font-bold" },
+	h3: { tag: "h3", classes: "text-3xl font-bold" },
+	h4: { tag: "h4", classes: "text-2xl font-bold" },
+	h5: { tag: "h5", classes: "text-xl font-bold" },
+	h6: { tag: "h6", classes: "text-lg font-bold" },
+
+	"display-1": { tag: "h1", classes: "text-6xl font-extralight" },
+	"display-2": { tag: "h2", classes: "text-5xl font-extralight" },
+	"display-3": { tag: "h3", classes: "text-4xl font-extralight" },
+	"display-4": { tag: "h4", classes: "text-3xl font-extralight" },
+	"display-5": { tag: "h5", classes: "text-2xl font-extralight" },
+	"display-6": { tag: "h6", classes: "text-xl font-extralight" },
+
+	lead: { tag: "p", classes: "text-lg font-light" },
+};
+
+/* Define gradient classes for text */
+const gradientClasses: { [key: string]: string } = {
+	gradient:
+		"bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent",
+	"gradient-blue":
+		"bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent",
+	"gradient-green":
+		"bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent",
+	"gradient-red":
+		"bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent",
+};
+
+/* Fallback to paragraph if type is invalid */
+const { tag: Tag, classes: typeClasses } = typographyMap[variant] || {
+	tag: "p",
+	classes: "",
+};
+
+/* Getting gradient classes if gradient is specified */
+const gradientClass =
+	gradient && gradientClasses[gradient] ? gradientClasses[gradient] : "";
+
+/* Merging typography classes, custom classes and gradient classes */
+const combinedClasses = cx(typeClasses, className, gradientClass);
+---
+
+<Tag {...{ class: combinedClasses }}>
+	<slot />
+</Tag>

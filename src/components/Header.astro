@@ -1,8 +1,30 @@
-<header class="bg-blue-800">
-	<div class="container text-white">
-		<h1 class="text-3xl font-bold">TradeChain</h1>
-		<p class="font-thin text-blue-200">
-			Trade with confidence and control your risks
-		</p>
+---
+/**
+ * Header component with logo and navigation.
+ *
+ * @component
+ * @example
+ * <Header />
+ */
+
+import Logo from "./Logo.astro";
+import NavLink from "./ui/NavLink.astro";
+---
+
+<header class="bg-gradient-to-r from-blue-900 to-blue-700 p-5">
+	<div class="container mx-auto text-white flex justify-between items-center">
+		<Logo description="Trade with confidence and control your risks" />
+		<NavLink
+			activeClass="text-blue-400"
+			links={[
+				{ href: "/", title: "App", text: "App" },
+				{ href: "/uikit", title: "UI Kit", text: "UI Kit" },
+				{
+					href: "/style-guide",
+					title: "Style Guide",
+					text: "Style Guide",
+				},
+			]}
+		/>
 	</div>
 </header>

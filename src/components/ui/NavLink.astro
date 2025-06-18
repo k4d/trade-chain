@@ -1,0 +1,64 @@
+---
+/* Component UI <NavLink> */
+/**
+ * Navigation link component that renders a list of links with active state highlighting.
+ *
+ * @component
+ * @example
+ * <NavLink
+ *   links={[
+ *     { href: '/', text: 'Home' },
+ *     { href: '/about', text: 'About', class: 'hover:text-purple-600' }
+ *   ]}
+ *   activeClass="text-red-500 font-semibold"
+ * />
+ *
+ * @param {Object} props - Component props
+ * @param {Array<{ href: string, title?: string, text: string, class?: string }>} props.links - Array of navigation items
+ * @param {string} [props.class] - Custom container class
+ * @param {string} [props.activeClass] - Class applied to the currently active link
+ */
+
+import { cx } from "../../utils/utils";
+import Link from "./Link.astro";
+
+interface NavLinkItem {
+	href: string;
+	title?: string;
+	text: string;
+	class?: string;
+}
+
+interface Props {
+	links: NavLinkItem[];
+	class?: string;
+	activeClass?: string;
+}
+
+const {
+	links,
+	class: containerClass,
+	activeClass: propActiveClass,
+} = Astro.props;
+
+const defaultActiveClass = "text-blue-600";
+const defaultContainerClass =
+	"flex flex-wrap justify-center items-center gap-4";
+const combinedClasses = cx(defaultContainerClass, containerClass);
+---
+
+<nav class={combinedClasses}>
+	{
+		links.map((link) => {
+			const isActive = Astro.url.pathname === link.href;
+			const linkClass = isActive
+				? cx(link.class, propActiveClass || defaultActiveClass)
+				: link.class;
+			return (
+				<Link href={link.href} title={link.title} class={linkClass}>
+					{link.text}
+				</Link>
+			);
+		})
+	}
+</nav>

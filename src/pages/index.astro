@@ -1,8 +1,21 @@
 ---
+/**
+ * The home page of the TradeChain application.
+ *
+ * @file
+ * @name index.astro
+ * @description The main landing page featuring a search component for trading and analysis.
+ * @overview
+ * This is the entry point of the application.
+ * Renders the layout with title and includes the main Search component.
+ */
+
 import Layout from "../layouts/Layout.astro";
-import Search from "../components/Search.astro";
+import Search from "../components/features/Search.astro";
+
+const title = "TradeChain — Trade with confidence and control your risks.";
 ---
 
-<Layout title="TradeChain — Trade with confidence and control your risks.">
+<Layout title={title}>
 	<Search />
 </Layout>
