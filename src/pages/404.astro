@@ -1,0 +1,41 @@
+---
+/**
+ * 404 — Page Not Found
+ *
+ * @file
+ * @name 404.astro
+ * @description Displays when the user tries to access a non-existent page.
+ * @example
+ * <Layout title="Page Not Found">
+ *   <main class="flex flex-col items-center justify-center min-h-screen text-center">
+ *     <Typography variant="display-1">404</Typography>
+ *     <Typography variant="lead" class="text-gray-600 mb-8">
+ *       Oops! The page you're looking for doesn't exist.
+ *     </Typography>
+ *     <a href="/" class="btn btn-primary">Back to Home page</a>
+ *   </main>
+ * </Layout>
+ */
+
+import Layout from "@/layouts/Layout.astro";
+import Typography from "@/components/ui/Typography.astro";
+
+const title = "Page Not Found";
+---
+
+<Layout title={title}>
+	<main
+		class="flex flex-col items-center justify-center min-h-screen text-center"
+	>
+		<Typography variant="display-1" class="mb-5">404</Typography>
+		<Typography variant="lead" class="text-gray-600 mb-5">
+			{title}
+		</Typography>
+		<a
+			href="/"
+			class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+		>
+			Back to Home page
+		</a>
+	</main>
+</Layout>
