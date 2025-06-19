@@ -19,23 +19,21 @@
 
 import Layout from "@/layouts/Layout.astro";
 import Typography from "@/components/ui/Typography.astro";
+import Link from "@components/ui/Link.astro";
 
 const title = "Page Not Found";
 ---
 
 <Layout title={title}>
-	<main
-		class="flex flex-col items-center justify-center min-h-screen text-center"
-	>
+	<main class="flex flex-col items-center justify-center mt-5">
 		<Typography variant="display-1" class="mb-5">404</Typography>
 		<Typography variant="lead" class="text-gray-600 mb-5">
 			{title}
 		</Typography>
-		<a
+		<Link
 			href="/"
-			class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+			title="Back to Home page"
+			class="text-blue-500 hover:text-blue-700">Back to Home page</Link
 		>
-			Back to Home page
-		</a>
 	</main>
 </Layout>
