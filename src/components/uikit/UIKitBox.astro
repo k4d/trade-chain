@@ -1,0 +1,40 @@
+---
+/**
+ * A reusable box component for displaying UI components inside the UI Kit dashboard.
+ *
+ * @component
+ * @example
+ * <UIKitBox title="Typography" description="All available typography styles">
+ *   <Typography variant="h1">Heading 1</Typography>
+ * </UIKitBox>
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.title - Title of the component section (required)
+ * @param {string} [props.description] - Optional description explaining the component or section
+ */
+
+import Typography from "@/components/ui/Typography.astro";
+
+interface Props {
+	/**
+	 * Title of the component section
+	 * @type {string}
+	 */
+	title: string;
+	/**
+	 * Optional description explaining the component or section
+	 * @type {string|undefined}
+	 */
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="mt-5 bg-white p-5">
+	<Typography variant="h5" class="text-gray-800">{title}</Typography>
+	<Typography variant="lead" class="text-gray-600">{description}</Typography>
+	<div class="mt-7 space-y-2">
+		<slot />
+	</div>
+</section>

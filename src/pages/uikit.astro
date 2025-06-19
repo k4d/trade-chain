@@ -1,0 +1,57 @@
+---
+/**
+ * UI Kit dashboard page listing all available components.
+ *
+ * @file
+ * @name uikit.astro
+ * @description Displays a list of reusable UI components with descriptions and live examples.
+ */
+
+import Layout from "@/layouts/Layout.astro";
+import Typography from "@/components/ui/Typography.astro";
+import UIKitBox from "@/components/uikit/UIKitBox.astro";
+
+import { Components } from "@/components/uikit/Components";
+import * as UIKitComponents from "@/components/uikit/Components";
+
+const ComponentType = UIKitComponents as Record<string, any>;
+
+const title =
+	"TradeChain UI Kit: Reusable Components, Typography, UI Patterns and UI  Guidelines";
+---
+
+<Layout title={title}>
+	<Typography variant="h2" class="text-gray-800">TradeChain UI Kit</Typography
+	>
+	<Typography variant="lead" class="text-gray-600">
+		Reusable Components, Typography, UI Patterns and UI Guidelines
+	</Typography>
+	{
+		Components.map((component) => {
+			const componentName = `UI${component.name}`;
+			const Component = ComponentType[componentName];
+
+			if (!Component) {
+				return (
+					<UIKitBox
+						title={component.name}
+						description={`No component found for "${component.name}"`}
+					>
+						<Typography variant="lead" class="text-red-500">
+							Component not implemented yet.
+						</Typography>
+					</UIKitBox>
+				);
+			}
+
+			return (
+				<UIKitBox
+					title={component.name}
+					description={component.description}
+				>
+					<Component {...Astro.props} />
+				</UIKitBox>
+			);
+		})
+	}
+</Layout>

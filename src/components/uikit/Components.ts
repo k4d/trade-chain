@@ -1,0 +1,53 @@
+/**
+ * UI Components
+ *
+ * This module re-exports all individual UI components used in the TradeChain UI Kit.
+ */
+export { default as UITypography } from "./UITypography.astro";
+export { default as UILink } from "./UILink.astro";
+export { default as UINavLink } from "./UINavLink.astro";
+
+/**
+ * @interface
+ * @description Metadata for a UI component.
+ * Contains name and description used in documentation and UI Kit dashboard.
+ */
+export interface ComponentMeta {
+	/**
+	 * Name of the component (without the "UI" prefix)
+	 * @example 'Typography', 'Button'
+	 */
+	name: string;
+	/**
+	 * Brief description of the component's purpose and functionality
+	 * @example 'Reusable button component with multiple styles'
+	 */
+	description: string;
+}
+
+/**
+ * List of available UI components in the TradeChain design system.
+ *
+ * Used in `/uikit.astro` to dynamically render UI component cards.
+ */
+export const Components: ComponentMeta[] = [
+	{
+		name: "Typography",
+		description: "Comprehensive typography system for TradeChain UI Kit.",
+	},
+	{
+		name: "Link",
+		description:
+			"Reusable link component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "NavLink",
+		description:
+			"Navigation link component that supports active states and dynamic route highlighting.",
+	},
+	{
+		name: "Button",
+		description:
+			"Reusable button component with support for multiple styles and custom classes.",
+	},
+];
