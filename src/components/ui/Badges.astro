@@ -1,0 +1,91 @@
+---
+/* Component UI <Badges> */
+
+/**
+ * A reusable badge component with multiple visual styles and variants.
+ *
+ * @component
+ * @example
+ * <Badges variant="success">New</Badges>
+ *
+ * @example
+ * <Badges variant="gradient-blue">Beta</Badges>
+ *
+ * @param {Object} props - Component props
+ * @param {'primary'|'secondary'|'danger'|'warning'|'success'|'info'|'light'|'dark'|'outline-primary'|'outline-secondary'|'outline-danger'|'outline-warning'|'outline-success'|'outline-info'|'outline-light'|'outline-dark'|'gradient-blue'|'gradient-green'|'gradient-red'} [props.variant='primary'] - Visual style of the badge
+ */
+
+export interface Props {
+	/**
+	 * The visual style of the badge.
+	 * Can be one of several predefined variants:
+	 * - Solid: primary, secondary, danger, warning, success, info, light, dark
+	 * - Outline: outline-primary ... outline-dark
+	 * - Gradient: gradient-blue, gradient-green, gradient-red
+	 * @default "primary"
+	 */
+	variant?:
+		| "primary"
+		| "secondary"
+		| "danger"
+		| "warning"
+		| "success"
+		| "info"
+		| "light"
+		| "dark"
+		| "outline-primary"
+		| "outline-secondary"
+		| "outline-danger"
+		| "outline-warning"
+		| "outline-success"
+		| "outline-info"
+		| "outline-light"
+		| "outline-dark"
+		| "gradient-blue"
+		| "gradient-green"
+		| "gradient-red";
+}
+
+const { variant = "primary" } = Astro.props;
+
+/**
+ * Tailwind CSS classes for each badge variant.
+ */
+const variantClasses: Record<string, string> = {
+	/* Solid variants */
+	primary: "bg-blue-600 text-white",
+	secondary: "bg-gray-600 text-white",
+	danger: "bg-red-600 text-white",
+	warning: "bg-yellow-500 text-gray-900",
+	success: "bg-green-600 text-white",
+	info: "bg-cyan-500 text-white",
+	light: "bg-gray-200 text-gray-800",
+	dark: "bg-gray-800 text-white",
+
+	/* Outline variants */
+	"outline-primary": "border border-blue-600 text-blue-600",
+	"outline-secondary": "border border-gray-300 text-gray-600",
+	"outline-danger": "border border-red-600 text-red-600",
+	"outline-warning": "border border-yellow-500 text-yellow-600",
+	"outline-success": "border border-green-600 text-green-600",
+	"outline-info": "border border-cyan-500 text-cyan-600",
+	"outline-light": "border border-gray-300 text-gray-900",
+	"outline-dark": "border border-gray-800 text-gray-800",
+
+	/* Gradient variants */
+	"gradient-blue": "bg-gradient-to-r from-blue-500 to-purple-600 text-white",
+	"gradient-green": "bg-gradient-to-r from-green-400 to-blue-600 text-white",
+	"gradient-red": "bg-gradient-to-r from-red-400 to-purple-600 text-white",
+};
+
+/* Base Tailwind CSS classes applied to all badges variants */
+const baseClasses =
+	"inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium";
+
+/* Combine all classes */
+const badgeClasses = `${baseClasses} ${variantClasses[variant] || variantClasses.primary}`;
+---
+
+<span class={badgeClasses}>
+	<slot />
+</span>

@@ -6,6 +6,8 @@
 export { default as UITypography } from "./UITypography.astro";
 export { default as UILink } from "./UILink.astro";
 export { default as UINavLink } from "./UINavLink.astro";
+export { default as UIButton } from "./UIButton.astro";
+export { default as UIBadges } from "./UIBadges.astro";
 
 /**
  * @interface
@@ -49,5 +51,10 @@ export const Components: ComponentMeta[] = [
 		name: "Button",
 		description:
 			"Reusable button component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Badges",
+		description:
+			"Reusable badge component with support for multiple styles and custom classes.",
 	},
 ];
