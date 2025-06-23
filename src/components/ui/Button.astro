@@ -1,0 +1,176 @@
+---
+/* Component UI <Button> */
+
+/**
+ * A reusable button component that renders either an anchor or a native button,
+ * depending on the presence of the `href` prop.
+ *
+ * @component
+ * @example
+ * <Button href="/about" variant="primary" size="medium">
+ *   Learn More
+ * </Button>
+ *
+ * @example
+ * <Button variant="danger" type="submit">Submit Form</Button>
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.href] - If provided, renders as `<a>`. Otherwise, renders as `<button>`
+ * @param {'primary'|'secondary'|'danger'|'warning'|'success'|'info'|'light'|'dark'|'outline-primary'|'outline-secondary'|'outline-danger'|'outline-warning'|'outline-success'|'outline-info'|'outline-light'|'link-primary'|'link-secondary'|'link-danger'|'link-warning'|'link-success'|'link-info'|'link-light'|'link-dark'|'outline-dark'|'gradient-blue'|'gradient-green'|'gradient-red'} [props.variant='primary'] - Visual style of the button
+ * @param {'s'|'m'|'l'} [props.size='m'] - Size of the button
+ * @param {'button'|'submit'|'reset'} [props.type='button'] - Type of the native button
+ * @param {string} [props.class] - Additional custom Tailwind classes
+ * @param {string} [props.title] - Optional title attribute for accessibility or tooltip
+ */
+
+interface Props {
+	/**
+	 * The URL the button links to (optional).
+	 * If not provided, renders as a native `<button>`.
+	 */
+	href?: string;
+
+	/**
+	 * The visual style of the button.
+	 * Can be one of several predefined variants:
+	 * - Solid: primary, secondary, danger, warning, success, info, light, dark
+	 * - Outline: outline-primary ... outline-dark
+	 * - Gradient: gradient-blue, gradient-green, gradient-red
+	 * @default "primary"
+	 */
+	variant?:
+		| "primary"
+		| "secondary"
+		| "danger"
+		| "warning"
+		| "success"
+		| "info"
+		| "light"
+		| "dark"
+		| "outline-primary"
+		| "outline-secondary"
+		| "outline-danger"
+		| "outline-warning"
+		| "outline-success"
+		| "outline-info"
+		| "outline-light"
+		| "outline-dark"
+		| "link-primary"
+		| "link-secondary"
+		| "link-danger"
+		| "link-warning"
+		| "link-success"
+		| "link-info"
+		| "link-light"
+		| "link-dark"
+		| "gradient-blue"
+		| "gradient-green"
+		| "gradient-red";
+
+	/**
+	 * The size of the button.
+	 * @default "medium"
+	 * @type {"xs" | "s" | "m" | "l"}
+	 */
+	size?: "xs" | "s" | "m" | "l";
+
+	/**
+	 * The type of the button when rendered as a native `<button>`.
+	 * @default "button"
+	 */
+	type?: "button" | "submit" | "reset";
+
+	/**
+	 * Additional custom Tailwind classes.
+	 * @type {string|undefined}
+	 */
+	class?: string;
+
+	/**
+	 * Optional title attribute for tooltips or accessibility.
+	 * @type {string|undefined}
+	 */
+	title?: string;
+}
+
+const {
+	href,
+	variant = "primary",
+	size = "m",
+	type = "button",
+	class: customClass,
+	title,
+} = Astro.props;
+
+/* Base Tailwind CSS classes applied to all button variants */
+const baseClasses =
+	"inline-block no-underline rounded transition-colors duration-200";
+
+/* Variant-specific Tailwind classes */
+const variantClasses: Record<string, string> = {
+	/* Solid variants */
+	primary: "bg-blue-600 hover:bg-blue-700 text-white",
+	secondary: "bg-green-600 hover:bg-green-700 text-white",
+	danger: "bg-red-600 hover:bg-red-700 text-white",
+	"outline-secondary":
+		"border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800",
+	warning: "bg-yellow-500 hover:bg-yellow-600 text-gray-900",
+	success: "bg-green-600 hover:bg-green-700 text-white",
+	info: "bg-cyan-500 hover:bg-cyan-600",
+	light: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+	dark: "bg-gray-800 hover:bg-gray-900 text-white",
+
+	/* Outline variants */
+	"outline-primary": "border border-blue-600 text-blue-600 hover:bg-blue-50",
+	"outline-danger": "border border-red-600 text-red-600 hover:bg-red-50",
+	"outline-warning":
+		"border border-yellow-500 text-yellow-600 hover:bg-yellow-50 hover:text-yellow-700",
+	"outline-success":
+		"border border-green-600 text-green-600 hover:bg-green-50",
+	"outline-info":
+		"border border-cyan-500 text-cyan-600 hover:bg-cyan-50 hover:text-cyan-700",
+	"outline-light": "border border-gray-300 text-gray-900 hover:bg-gray-100",
+	"outline-dark": "border border-gray-800 text-gray-800 hover:bg-gray-100",
+
+	/* Link variants */
+	"link-primary": "text-blue-600 hover:text-blue-700",
+	"link-secondary": "text-gray-600 hover:text-gray-700",
+	"link-danger": "text-red-600 hover:text-red-700",
+	"link-warning": "text-yellow-600 hover:text-yellow-700",
+	"link-success": "text-green-600 hover:text-green-700",
+	"link-info": "text-cyan-600 hover:text-cyan-700",
+	"link-light": "text-gray-600 hover:text-gray-700",
+	"link-dark": "text-gray-800 hover:text-gray-900",
+
+	/* Gradient variants */
+	"gradient-blue":
+		"bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white",
+	"gradient-green":
+		"bg-gradient-to-r from-green-400 to-blue-600 hover:from-green-500 hover:to-blue-700 text-white",
+	"gradient-red":
+		"bg-gradient-to-r from-red-400 to-purple-600 hover:from-red-500 hover:to-purple-700 text-white",
+};
+
+/* Size-specific Tailwind classes */
+const sizeClasses = {
+	xs: "px-1.5 py-0.5 text-xs",
+	s: "px-3 py-1.5 text-sm",
+	m: "px-5 py-2.5 text-base", // Keep original padding and text size
+	l: "px-7 py-3.5 text-lg",
+};
+
+/* Combine all classes */
+const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${customClass || ""}`;
+---
+
+{
+	href ? (
+		<a href={href} class={buttonClasses} title={title}>
+			<slot />
+		</a>
+	) : (
+		<button type={type} class={buttonClasses} title={title}>
+			<slot />
+		</button>
+	)
+}
