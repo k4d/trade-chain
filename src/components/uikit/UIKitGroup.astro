@@ -1,0 +1,53 @@
+---
+/**
+ * A reusable container for grouping related UI elements with optional title and description.
+ *
+ * @component
+ * @example
+ * <UIKitGroup title="Payment Options" description="Select your preferred payment method">
+ *   <Button>PayPal</Button>
+ *   <Button variant="secondary">Credit Card</Button>
+ * </UIKitGroup>
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.title] - Optional title for the group
+ * @param {string} [props.description] - Optional description explaining the group
+ */
+
+import Typography from "@/components/ui/Typography.astro";
+
+interface Props {
+	/**
+	 * Optional title of the form group
+	 * @type {string|undefined}
+	 */
+	title?: string;
+	/**
+	 * Optional description explaining the purpose of the group
+	 * @type {string|undefined}
+	 */
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="mb-5 last:mb-0">
+	{
+		title && (
+			<Typography variant="h6" class="text-gray-800 text-sm capitalize">
+				{title}
+			</Typography>
+		)
+	}
+	{
+		description && (
+			<Typography variant="lead" class="text-gray-600">
+				{description}
+			</Typography>
+		)
+	}
+	<div class="flex flex-wrap gap-2 space-x-1 mt-2.5">
+		<slot />
+	</div>
+</div>
