@@ -8,6 +8,7 @@ export { default as UILink } from "./UILink.astro";
 export { default as UINavLink } from "./UINavLink.astro";
 export { default as UIButton } from "./UIButton.astro";
 export { default as UIBadges } from "./UIBadges.astro";
+export { default as UIAlerts } from "./UIAlerts.astro";
 
 /**
  * @interface
@@ -17,7 +18,7 @@ export { default as UIBadges } from "./UIBadges.astro";
 export interface ComponentMeta {
 	/**
 	 * Name of the component (without the "UI" prefix)
-	 * @example 'Typography', 'Button'
+	 * @example 'Typography', 'Link', 'Button', 'Badges', 'Alerts'
 	 */
 	name: string;
 	/**
@@ -56,5 +57,10 @@ export const Components: ComponentMeta[] = [
 		name: "Badges",
 		description:
 			"Reusable badge component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Alerts",
+		description:
+			"Reusable alert component with support for multiple styles and custom classes.",
 	},
 ];

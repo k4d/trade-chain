@@ -1,0 +1,96 @@
+---
+/* Component UI <Alerts> */
+
+/**
+ * A reusable alert component with support for multiple visual styles.
+ *
+ * @component
+ * @example
+ * <Alerts variant="success">
+ *   This is a success message!
+ * </Alerts>
+ *
+ * @param {Object} props - Component props
+ * @param {'primary'|'secondary'|'danger'|'warning'|'success'|'info'|'light'|'dark'|'outline-primary'|'outline-secondary'|'outline-danger'|'outline-warning'|'outline-success'|'outline-info'|'outline-light'|'outline-dark'|'gradient-blue'|'gradient-green'|'gradient-red'} [props.variant='info'] - Visual style of the alert
+ * @param {string} [props.class] - Additional custom Tailwind classes
+ */
+
+interface Props {
+	/**
+	 * The visual style of the alert.
+	 * Can be one of several predefined variants:
+	 * - Solid: primary, secondary, danger, warning, success, info, light, dark
+	 * - Outline: outline-primary ... outline-dark
+	 * - Gradient: gradient-blue, gradient-green, gradient-red
+	 * @default "info"
+	 */
+	variant?:
+		| "primary"
+		| "secondary"
+		| "danger"
+		| "warning"
+		| "success"
+		| "info"
+		| "light"
+		| "dark"
+		| "outline-primary"
+		| "outline-secondary"
+		| "outline-danger"
+		| "outline-warning"
+		| "outline-success"
+		| "outline-info"
+		| "outline-light"
+		| "outline-dark"
+		| "gradient"
+		| "gradient-blue"
+		| "gradient-green"
+		| "gradient-red";
+	/**
+	 * Additional custom Tailwind classes.
+	 * @type {string|undefined}
+	 */
+	class?: string;
+}
+
+const { variant = "info", class: className } = Astro.props;
+
+/* Variant-specific Tailwind classes */
+const variantClasses: Record<string, string> = {
+	/* Solid variants */
+	primary: "bg-blue-100 border-blue-500 text-blue-700",
+	secondary: "bg-gray-200 border-gray-500 text-gray-700",
+	danger: "bg-red-100 border-red-500 text-red-700",
+	warning: "bg-yellow-100 border-yellow-500 text-yellow-700",
+	success: "bg-green-100 border-green-500 text-green-700",
+	info: "bg-cyan-100 border-cyan-500 text-cyan-700",
+	light: "bg-gray-100 border-gray-300 text-gray-800",
+	dark: "bg-gray-700 border-gray-900 text-gray-100",
+
+	/* Outline variants */
+	"outline-primary": "border border-blue-500 text-blue-700",
+	"outline-secondary": "border border-gray-500 text-gray-700",
+	"outline-danger": "border border-red-500 text-red-700",
+	"outline-warning": "border border-yellow-500 text-yellow-700",
+	"outline-success": "border border-green-500 text-green-700",
+	"outline-info": "border border-cyan-500 text-cyan-700",
+	"outline-light": "border border-gray-300 text-gray-700",
+	"outline-dark": "border border-gray-700 text-gray-800",
+
+	/* Gradient variants */
+	"gradient-blue":
+		"bg-gradient-to-r from-blue-100 to-purple-100 border-blue-300 text-gray-800",
+	"gradient-green":
+		"bg-gradient-to-r from-green-100 to-teal-100 border-green-300 text-gray-800",
+	"gradient-red":
+		"bg-gradient-to-r from-red-100 to-orange-100 border-red-300 text-gray-800",
+};
+
+const baseClasses = "border-l-4 p-4 rounded";
+
+/* Combine all classes */
+const alertClasses = `${baseClasses} ${variantClasses[variant] || variantClasses.info} ${className || ""}`;
+---
+
+<div class={alertClasses} role="alert">
+	<slot />
+</div>
