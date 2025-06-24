@@ -10,6 +10,7 @@ export { default as UIButton } from "./UIButton.astro";
 export { default as UIBadges } from "./UIBadges.astro";
 export { default as UIAlerts } from "./UIAlerts.astro";
 export { default as UISpinner } from "./UISpinner.astro";
+export { default as UIProgress } from "./UIProgress.astro";
 
 /**
  * @interface
@@ -67,5 +68,9 @@ export const Components: ComponentMeta[] = [
 	{
 		name: "Spinner",
 		description: "Demonstration of Spinner variants and sizes.",
+	},
+	{
+		name: "Progress",
+		description: "Demonstration of Progress variants and sizes.",
 	},
 ];

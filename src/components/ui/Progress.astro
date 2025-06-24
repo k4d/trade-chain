@@ -1,0 +1,56 @@
+---
+/* Component UI <Progress> */
+
+/**
+ * A reusable progress bar component with customizable progress and label.
+ *
+ * @component
+ * @example
+ * <Progress progress={75} label="75%" class="h-4 mt-2" />
+ *
+ * @example
+ * <Progress progress={30} label="In Progress" class="h-2 bg-red-200" />
+ *
+ * @param {Object} props - Component props
+ * @param {number} props.progress - The percentage value of the progress (0–100)
+ * @param {string} [props.label] - Optional custom label to show inside the progress bar
+ * @param {string} [props.class] - Optional additional Tailwind classes for customization
+ */
+
+interface Props {
+	/**
+	 * The current progress value (from 0 to 100).
+	 * Values outside this range will be clamped automatically.
+	 */
+	progress: number;
+
+	/**
+	 * Optional label shown inside the progress bar.
+	 * If not provided, defaults to the progress percentage.
+	 */
+	label?: string;
+
+	/**
+	 * Additional Tailwind CSS classes (e.g., 'h-6 bg-green-500 rounded-full')
+	 */
+	class?: string;
+}
+
+const { progress, label, class: className } = Astro.props;
+
+/* Clamp progress between 0 and 100 */
+const safeProgress = Math.max(0, Math.min(100, progress));
+
+/* Apply default height if not overridden */
+const containerClasses = `w-full bg-gray-200 ${className || "h-4"}`;
+
+/* Inner progress bar styles */
+const innerClasses = `bg-blue-600 h-full text-xs flex items-center justify-center text-white`;
+const widthStyle = `width: ${safeProgress}%`;
+---
+
+<div class={containerClasses}>
+	<div class={innerClasses} style={widthStyle}>
+		{safeProgress > 0 && <>{label ? label : `${safeProgress}%`}</>}
+	</div>
+</div>
