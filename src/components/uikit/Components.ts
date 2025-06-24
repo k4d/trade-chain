@@ -9,6 +9,7 @@ export { default as UINavLink } from "./UINavLink.astro";
 export { default as UIButton } from "./UIButton.astro";
 export { default as UIBadges } from "./UIBadges.astro";
 export { default as UIAlerts } from "./UIAlerts.astro";
+export { default as UISpinner } from "./UISpinner.astro";
 
 /**
  * @interface
@@ -62,5 +63,9 @@ export const Components: ComponentMeta[] = [
 		name: "Alerts",
 		description:
 			"Reusable alert component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Spinner",
+		description: "Demonstration of Spinner variants and sizes.",
 	},
 ];
