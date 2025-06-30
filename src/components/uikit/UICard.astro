@@ -1,0 +1,65 @@
+---
+import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
+import Card from "@/components/ui/Card.astro";
+import Typography from "@/components/ui/Typography.astro";
+import Button from "@/components/ui/Button.astro";
+---
+
+<UIKitGroup>
+	<Card>
+		<p>
+			Some quick example text to build on the card title and make up the
+			bulk of the card’s content.
+		</p>
+	</Card>
+	<Card
+		><slot slot="header">
+			<Typography variant="h5">Card Header</Typography>
+		</slot>
+		<slot slot="body">
+			<p>This is some text within a card body.</p>
+		</slot>
+	</Card>
+	<Card title="Card Header">
+		<slot slot="body">
+			<p>This is some text within a card body.</p>
+		</slot>
+		<slot slot="footer">
+			<Button variant="outline-primary" size="s">Button Footer</Button>
+		</slot>
+	</Card>
+</UIKitGroup>
+
+<UIKitGroup title="Variants Cards">
+	<Card variant="primary">
+		<p>Primary variant card</p>
+	</Card>
+
+	<Card variant="secondary">
+		<p>Secondary variant card</p>
+	</Card>
+
+	<Card variant="success">
+		<p>Success variant card</p>
+	</Card>
+
+	<Card variant="danger">
+		<p>Danger variant card</p>
+	</Card>
+
+	<Card variant="warning">
+		<p>Warning variant card</p>
+	</Card>
+
+	<Card variant="info">
+		<p>Info variant card</p>
+	</Card>
+
+	<Card variant="light">
+		<p>Light variant card</p>
+	</Card>
+
+	<Card variant="dark">
+		<p>Dark variant card</p>
+	</Card>
+</UIKitGroup>

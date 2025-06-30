@@ -1,0 +1,116 @@
+---
+/* Component UI <Card> */
+
+/**
+ * A reusable card component with optional header, body and footer slots.
+ *
+ * @component
+ * @example
+ * <Card title="User Profile" variant="primary">
+ *   <p>This is a simple card with a primary border.</p>
+ * </Card>
+ *
+ * @example
+ * <Card variant="success">
+ *   <template slot="header">Custom Header</template>
+ *   <p>Card body content</p>
+ *   <template slot="footer">Card Footer</template>
+ * </Card>
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.title] - Optional title shown in the header if no custom header provided
+ * @param {'primary'|'secondary'|'danger'|'warning'|'success'|'info'|'light'|'dark'} [props.variant='light'] - Card color theme
+ * @param {string} [props.class] - Additional Tailwind classes to override default styling
+ */
+
+import Typography from "@/components/ui/Typography.astro";
+
+interface Props {
+	/**
+	 * Optional title shown inside the header (if no custom header slot is provided).
+	 */
+	title?: string;
+
+	/**
+	 * Color variant of the card.
+	 * @default "light"
+	 */
+	variant?:
+		| "primary"
+		| "secondary"
+		| "danger"
+		| "warning"
+		| "success"
+		| "info"
+		| "light"
+		| "dark";
+
+	/**
+	 * Optional custom Tailwind classes to override default styling (e.g., shadow, margin)
+	 */
+	class?: string;
+}
+
+const { title, class: className, variant = "light" } = Astro.props;
+
+/**
+ * Mapping from variant to border color classes
+ */
+const variantClasses: Record<string, string> = {
+	/* Solid variants */
+	primary: "border-blue-300",
+	secondary: "border-gray-400",
+	danger: "border-red-500",
+	warning: "border-yellow-500",
+	success: "border-green-500",
+	info: "border-indigo-500",
+	light: "border-gray-300",
+	dark: "border-gray-800",
+};
+
+/**
+ * Base Tailwind classes applied to all cards
+ */
+const baseClasses = "border rounded-lg p-4 bg-white mb-4";
+
+/**
+ * Combined classes including variant and custom ones
+ */
+const cardClasses = `${baseClasses} ${variantClasses[variant] || variantClasses.light} ${className || ""}`;
+---
+
+<div class={cardClasses}>
+	{/* Header */}
+	{
+		Astro.slots.header ? (
+			<header class="card-header">
+				{title && <Typography variant="h5">{title}</Typography>}
+				<slot name="header" />
+			</header>
+		) : title ? (
+			<header class="card-header">
+				<Typography variant="h5">{title}</Typography>
+			</header>
+		) : null
+	}
+
+	{/* Body */}
+	{
+		Astro.slots.body ? (
+			<div class="card-body mt-5">
+				<slot name="body" />
+			</div>
+		) : (
+			<slot />
+		)
+	}
+
+	{/* Footer */}
+	{
+		Astro.slots.footer && (
+			<footer class="card-footer mt-5">
+				<slot name="footer" />
+			</footer>
+		)
+	}
+</div>

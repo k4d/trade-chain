@@ -11,6 +11,7 @@ export { default as UIBadges } from "./UIBadges.astro";
 export { default as UIAlerts } from "./UIAlerts.astro";
 export { default as UISpinner } from "./UISpinner.astro";
 export { default as UIProgress } from "./UIProgress.astro";
+export { default as UICard } from "./UICard.astro";
 
 /**
  * @interface
@@ -20,7 +21,7 @@ export { default as UIProgress } from "./UIProgress.astro";
 export interface ComponentMeta {
 	/**
 	 * Name of the component (without the "UI" prefix)
-	 * @example 'Typography', 'Link', 'Button', 'Badges', 'Alerts'
+	 * @example 'Typography', 'Link', 'Button', 'Badges', 'Alerts', 'Spinner', 'Card'
 	 */
 	name: string;
 	/**
@@ -72,5 +73,10 @@ export const Components: ComponentMeta[] = [
 	{
 		name: "Progress",
 		description: "Demonstration of Progress variants and sizes.",
+	},
+	{
+		name: "Card",
+		description:
+			"Reusable card component with support for multiple styles and custom classes.",
 	},
 ];
