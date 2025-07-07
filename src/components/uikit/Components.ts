@@ -14,6 +14,7 @@ export { default as UISpinner } from "./UISpinner.astro";
 export { default as UIProgress } from "./UIProgress.astro";
 export { default as UICard } from "./UICard.astro";
 export { default as UIInput } from "./UIFormInput.astro";
+export { default as UITooltip } from "./UITooltip.astro";
 
 /**
  * @interface
@@ -85,5 +86,10 @@ export const Components: ComponentMeta[] = [
 		name: "Input",
 		description:
 			"Reusable form input component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Tooltip",
+		description:
+			"Reusable tooltip component with support for multiple styles and custom classes.",
 	},
 ];

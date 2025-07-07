@@ -1,0 +1,73 @@
+---
+/* Component UI <Tooltip> */
+
+/**
+ * A reusable tooltip component that appears on hover.
+ *
+ * @component
+ * @example
+ * <Tooltip variant="bottom" class="max-w-xs">
+ *   <span>Hover me</span>
+ *   <template slot="default">This is a simple tooltip</template>
+ * </Tooltip>
+ *
+ * @param {Object} props - Component props
+ * @param {'top'|'bottom'|'left'|'right'} [props.variant='top'] - Position of the tooltip relative to the element
+ * @param {string} [props.class] - Optional custom Tailwind classes for container
+ */
+
+interface Props {
+	/**
+	 * The text to display in the tooltip.
+	 */
+	text: string;
+
+	/**
+	 * The position of the tooltip relative to the element.
+	 * @default "top"
+	 */
+	variant?: "top" | "bottom" | "left" | "right";
+
+	/**
+	 * Optional custom Tailwind classes for styling the tooltip or container
+	 */
+	class?: string;
+}
+
+const { text, variant = "top", class: className } = Astro.props;
+
+/**
+ * The container classes for the tooltip component.
+ */
+const containerClasses = "relative inline-block group";
+
+/**
+ * The base classes for the tooltip component.
+ */
+const baseClasses =
+	"absolute z-10 w-max max-w-xs px-2 py-1 text-xs font-light text-white bg-gray-700 rounded-sm shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 cursor-default";
+
+/**
+ * Mapping from variant to positioning classes.
+ */
+const variantClasses = {
+	top: "bottom-full left-1/2 -translate-x-1/2 mb-1",
+	bottom: "top-full left-1/2 -translate-x-1/2 mt-1",
+	left: "right-full top-1/2 -translate-y-1/2 mr-1",
+	right: "left-full top-1/2 -translate-y-1/2 ml-1",
+};
+
+/**
+ * The combined classes for the tooltip component.
+ */
+const combinedClasses = [baseClasses, variantClasses[variant]]
+	.filter(Boolean)
+	.join(" ");
+---
+
+<div class:list={[containerClasses, className]}>
+	<slot />
+	<div class={combinedClasses} role="tooltip">
+		{text}
+	</div>
+</div>

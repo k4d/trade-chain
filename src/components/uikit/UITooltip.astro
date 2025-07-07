@@ -1,0 +1,31 @@
+---
+import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import Button from "@/components/ui/Button.astro";
+---
+
+<UIKitGroup>
+	<Tooltip text="Tooltip on top" variant="top">
+		<Button href="#" variant="outline-primary" size="s"
+			>Tooltip on top</Button
+		>
+	</Tooltip>
+
+	<Tooltip text="Tooltip on bottom" variant="bottom">
+		<Button href="#" variant="outline-primary" size="s"
+			>Tooltip on bottom</Button
+		>
+	</Tooltip>
+
+	<Tooltip text="Tooltip on left" variant="left">
+		<Button href="#" variant="outline-primary" size="s"
+			>Tooltip on left</Button
+		>
+	</Tooltip>
+
+	<Tooltip text="Tooltip on right" variant="right">
+		<Button href="#" variant="outline-primary" size="s"
+			>Tooltip on right</Button
+		>
+	</Tooltip>
+</UIKitGroup>
