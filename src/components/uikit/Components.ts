@@ -3,6 +3,7 @@
  *
  * This module re-exports all individual UI components used in the TradeChain UI Kit.
  */
+
 export { default as UITypography } from "./UITypography.astro";
 export { default as UILink } from "./UILink.astro";
 export { default as UINavLink } from "./UINavLink.astro";
@@ -12,6 +13,7 @@ export { default as UIAlerts } from "./UIAlerts.astro";
 export { default as UISpinner } from "./UISpinner.astro";
 export { default as UIProgress } from "./UIProgress.astro";
 export { default as UICard } from "./UICard.astro";
+export { default as UIInput } from "./UIFormInput.astro";
 
 /**
  * @interface
@@ -78,5 +80,10 @@ export const Components: ComponentMeta[] = [
 		name: "Card",
 		description:
 			"Reusable card component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Input",
+		description:
+			"Reusable form input component with support for multiple styles and custom classes.",
 	},
 ];

@@ -1,0 +1,44 @@
+---
+/* Component UI <FormLabel> */
+
+/**
+ * A reusable form label component for Astro projects.
+ *
+ * @component
+ * @example
+ * <FormLabel title="Email" for="email" />
+ *
+ * @example
+ * <FormLabel title="Username" class="text-blue-600" />
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.title - Text to display as label
+ * @param {string} [props.for] - ID of the input element this label is bound to
+ * @param {string} [props.class] - Optional Tailwind classes to override default styles
+ */
+
+interface Props {
+	/**
+	 * The text content of the label.
+	 */
+	title: string;
+
+	/**
+	 * The ID of the associated input field.
+	 * Used in the `for` attribute to bind the label to an input.
+	 */
+	for?: string;
+
+	/**
+	 * Optional custom Tailwind CSS classes
+	 */
+	class?: string;
+}
+
+const { title, for: forInput, class: className } = Astro.props;
+
+const baseClasses = "block mb-1 text-sm font-medium text-gray-700";
+const combinedClasses = `${baseClasses} ${className || ""}`;
+---
+
+<label for={forInput} class={combinedClasses}>{title}</label>

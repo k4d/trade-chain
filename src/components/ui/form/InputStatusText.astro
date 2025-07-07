@@ -1,0 +1,55 @@
+---
+/* Component UI <InputStatusText> */
+
+/**
+ * A reusable status text component for form inputs.
+ *
+ * @component
+ * @example
+ * <InputStatusText variant="success">Password changed</InputStatusText>
+ *
+ * @example
+ * <InputStatusText variant="warning" class="italic">
+ *   Check your email for a verification link
+ * </InputStatusText>
+ *
+ * @param {Object} props - Component props
+ * @param {'default'|'success'|'warning'|'error'} props.variant - Visual style of the text
+ * @param {string} [props.class] - Optional custom Tailwind classes
+ */
+
+interface Props {
+	/**
+	 * The visual style of the text.
+	 * @default "default"
+	 */
+	variant: "default" | "error" | "success" | "warning";
+
+	/**
+	 * Optional custom Tailwind classes (e.g., 'italic', 'font-bold')
+	 */
+	class?: string;
+}
+
+const { variant = "default", class: className } = Astro.props;
+
+/**
+ * Mapping from variant to color styles
+ */
+const classesMap = {
+	default: "text-gray-400",
+	success: "text-green-600",
+	warning: "text-yellow-600",
+	error: "text-red-600",
+};
+
+/**
+ * Base component CSS classes
+ */
+const baseClasses = "mt-1 text-sm cursor-default";
+const combinedClasses = `${baseClasses} ${classesMap[variant]} ${className || ""}`;
+---
+
+<span class={combinedClasses}>
+	<slot />
+</span>

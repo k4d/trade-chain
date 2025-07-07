@@ -1,0 +1,173 @@
+---
+/* Component UI <Input> */
+
+/**
+ * A reusable form input component with label, helper text, error text and styling.
+ *
+ * @component
+ * @example
+ * <Input label="Email" type="email" name="email" id="email" placeholder="you@example.com" />
+ *
+ * @example
+ * <Input label="Password" errorText="Password is too short." />
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.label] - Optional label shown above the input
+ * @param {'text'|'email'|'password'|'number'|'tel'} [props.type='text'] - Input field type
+ * @param {'default'|'error'|'warning'|'success'} [props.variant='default'] - Visual style of the input
+ * @param {'xs'|'s'|'m'|'l'} [props.size='m'] - Size of the input
+ * @param {string} [props.class] - Additional Tailwind classes
+ * @param {string} [props.helperText] - Optional descriptive text below the input
+ * @param {string} [props.errorText] - Error message shown in red if present
+ * @param {string} [props.warningText] - Warning message shown in yellow if present
+ * @param {string} [props.successText] - Success message shown in green if present
+ */
+
+import type { HTMLAttributes } from "astro/types";
+import Label from "@/components/ui/form/Label.astro";
+import StatusText from "@/components/ui/form/InputStatusText.astro";
+
+interface Props extends HTMLAttributes<"input"> {
+	/**
+	 * The type of the input field.
+	 * @default "text"
+	 */
+	type?: HTMLAttributes<"input">["type"];
+
+	/**
+	 * Optional label shown above the input.
+	 */
+	label?: string;
+
+	/**
+	 * Optional helper text shown below the input.
+	 */
+	helperText?: string;
+
+	/**
+	 * Optional error text shown if validation fails.
+	 */
+	errorText?: string;
+
+	/**
+	 * Optional warning text shown if validation is warning.
+	 */
+	warningText?: string;
+
+	/**
+	 * Optional success text shown if validation succeeds.
+	 */
+	successText?: string;
+
+	/**
+	 * Visual style of the input.
+	 * @default "default"
+	 */
+	variant?: "default" | "error" | "success" | "warning";
+
+	/**
+	 * Size of the input field.
+	 * @default "m"
+	 */
+	size?: "xs" | "s" | "m" | "l";
+
+	/**
+	 * Optional custom Tailwind classes.
+	 */
+	class?: string;
+}
+
+/**
+ * Props for the Input component.
+ */
+const {
+	type = "text",
+	name,
+	id,
+	value,
+	placeholder,
+	required,
+	disabled,
+	readonly,
+	class: className,
+	variant = "default",
+	size = "m",
+	label,
+
+	helperText,
+	errorText,
+	warningText,
+	successText,
+
+	...rest
+} = Astro.props;
+
+/**
+ * Base input classes
+ */
+const baseClasses =
+	"bg-white block w-full border rounded-md shadow-sm placeholder-gray-400 focus:outline-none";
+
+/**
+ * Mapping from variant to color styles
+ */
+const variantClasses: Record<string, string> = {
+	default:
+		"border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-200 disabled:text-gray-400 read-only:bg-gray-100",
+	error: "text-red-900 border-red-500 focus:ring-red-500 focus:border-red-500 disabled:bg-red-200 disabled:border-red-300 disabled:text-red-400",
+	warning:
+		"border-yellow-500 text-yellow-900 focus:ring-yellow-500 focus:border-yellow-500 disabled:bg-yellow-200 disabled:border-yellow-400 disabled:text-yellow-500",
+	success:
+		"border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500 disabled:bg-green-200 disabled:border-green-400 disabled:text-green-500",
+};
+
+/**
+ * Mapping from size to padding and font-size
+ */
+const sizeClasses: Record<string, string> = {
+	xs: "px-1.5 py-1 text-xs",
+	s: "px-3 py-1.5 text-sm",
+	m: "px-4 py-2 text-base",
+	l: "px-6 py-3 text-lg",
+};
+
+/**
+ * Combine all classes
+ */
+const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className || ""}`;
+
+/**
+ * Determine ID or NAME for label binding
+ */
+const labelFor = id || name || "";
+
+/**
+ * Determine status text based on variant
+ */
+const statusText =
+	{
+		success: successText,
+		error: errorText,
+		warning: warningText,
+		default: helperText,
+	}[variant] || helperText;
+---
+
+<div>
+	{label && <Label title={label} {...(labelFor && { for: labelFor })} />}
+
+	<input
+		type={type}
+		id={id}
+		name={name}
+		value={value}
+		placeholder={placeholder}
+		required={required}
+		disabled={disabled}
+		readonly={readonly}
+		class={combinedClasses}
+		{...rest}
+	/>
+
+	{statusText && <StatusText variant={variant}>{statusText}</StatusText>}
+</div>
