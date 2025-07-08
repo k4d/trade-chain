@@ -1,0 +1,11 @@
+---
+import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
+import Toast from "@/components/ui/Toast.astro";
+---
+
+<UIKitGroup>
+	<Toast message="Default toast message." />
+	<Toast message="Something went wrong. Please try again." variant="danger" />
+	<Toast message="Your session is about to expire." variant="warning" />
+	<Toast message="Operation completed successfully!" variant="success" />
+</UIKitGroup>

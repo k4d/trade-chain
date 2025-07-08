@@ -1,0 +1,91 @@
+---
+/* Component UI <Toast> */
+
+/**
+ * A reusable Toast component for showing notifications with different variants.
+ *
+ * @component
+ * @example
+ * <Toast message="Something went wrong!" variant="danger" />
+ *
+ * @example
+ * <Toast message="All good!" variant="success" class="fixed bottom-4 right-4 z-50" />
+ */
+
+import Card from "@/components/ui/Card.astro";
+import Typography from "@/components/ui/Typography.astro";
+import Button from "@/components/ui/Button.astro";
+
+/**
+ * The variant of the Toast component.
+ */
+type Variant = "danger" | "warning" | "success" | "light";
+
+/**
+ * Props for the Toast component.
+ */
+interface Props {
+	/**
+	 * The message to display in the toast.
+	 */
+	message: string;
+
+	/**
+	 * Visual style of the toast.
+	 * @default "light"
+	 */
+	variant?: Variant;
+
+	/**
+	 * Optional custom Tailwind classes (e.g., positioning, z-index)
+	 */
+	class?: string;
+}
+
+const { message, variant = "light", class: className } = Astro.props;
+
+/**
+ * Mapping from variant to text color.
+ */
+const messageVariantClasses: Record<Variant, string> = {
+	danger: "text-red-600",
+	warning: "text-yellow-600",
+	success: "text-green-600",
+	light: "text-gray-600",
+};
+
+/**
+ * Classes for message text.
+ */
+const messageClasses =
+	messageVariantClasses[variant] || messageVariantClasses.light;
+
+/**
+ * Base and combined container classes.
+ */
+const baseClasses = "shadow-lg";
+const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+---
+
+<Card variant={variant} class={combinedClasses}>
+	<div class="flex items-center justify-between">
+		<Typography variant="lead" class=`${messageClasses} mr-4`
+			>{message}</Typography
+		>
+		<Button size="xs" href="#" variant="link-light">
+			<svg
+				class="w-4 h-4"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"></path>
+			</svg>
+		</Button>
+	</div>
+</Card>
