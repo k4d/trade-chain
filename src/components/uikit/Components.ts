@@ -16,6 +16,7 @@ export { default as UICard } from "./UICard.astro";
 export { default as UIInput } from "./UIFormInput.astro";
 export { default as UITooltip } from "./UITooltip.astro";
 export { default as UIList } from "./UIList.astro";
+export { default as UITable } from "./UITable.astro";
 export { default as UIToast } from "./UIToast.astro";
 
 /**
@@ -98,6 +99,11 @@ export const Components: ComponentMeta[] = [
 		name: "List",
 		description:
 			"Reusable list component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Table",
+		description:
+			"Reusable table component with support for multiple styles and custom classes.",
 	},
 	{
 		name: "Toast",

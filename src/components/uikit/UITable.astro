@@ -1,0 +1,17 @@
+---
+import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
+import Table from "@/components/ui/Table.astro";
+---
+
+<UIKitGroup title="Basic Table">
+	<Table
+		headers={["Name", "Price", "Volume", "Market Cap"]}
+		rows={[
+			["Bitcoin", "$50000", "$1B", "$2100B"],
+			["Ethereum", "$3000", "$500M", "$210B"],
+			["Cardano", "$1.5", "$50M", "$10B"],
+			["Solana", "$10", "$100M", "$1B"],
+			["Polkadot", "$5", "$50M", "$5B"],
+		]}
+	/>
+</UIKitGroup>

@@ -1,0 +1,91 @@
+---
+/* Component UI <Table> */
+
+/**
+ * A reusable table component with headers and rows.
+ *
+ * @component
+ * @example
+ * <Table
+ *   headers={["Name", "Price", "Volume", "Market Cap"]}
+ *   rows={[
+ *     ["Bitcoin", "$50000", "$1B", "$2100B"],
+ *     ["Ethereum", "$3000", "$500M", "$210B"]
+ *   ]}
+ * />
+ *
+ * @param {Object} props - Component props
+ * @param {string[]} props.headers - List of header titles
+ * @param {string[][]} props.rows - 2D array of table data
+ * @param {string} [props.class] - Optional custom Tailwind classes for the table container
+ */
+
+type TableCell = string;
+
+interface Props {
+	/**
+	 * Array of column headers
+	 */
+	headers: string[];
+
+	/**
+	 * 2D array of table data
+	 */
+	rows: TableCell[][];
+
+	/**
+	 * Optional custom Tailwind classes (e.g., positioning, max-width)
+	 */
+	class?: string;
+}
+
+const { headers, rows, class: className } = Astro.props;
+
+/**
+ * Base classes for the table component
+ */
+const baseClasses = "min-w-full divide-y divide-gray-200";
+const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+---
+
+<table class={combinedClasses}>
+	<thead>
+		<tr>
+			{
+				headers.map((header: string) => (
+					<th
+						scope="col"
+						class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+					>
+						{header}
+					</th>
+				))
+			}
+		</tr>
+	</thead>
+
+	<tbody class="bg-white divide-y divide-gray-200">
+		{
+			rows.length > 0 ? (
+				rows.map((row, rowIndex) => (
+					<tr>
+						{row.map((cell, cellIndex) => (
+							<td class="px-6 py-4 whitespace-nowrap text-sm">
+								{cell}
+							</td>
+						))}
+					</tr>
+				))
+			) : (
+				<tr>
+					<td
+						colspan={headers.length}
+						class="py-4 px-6 text-center text-gray-500"
+					>
+						No data available.
+					</td>
+				</tr>
+			)
+		}
+	</tbody>
+</table>
