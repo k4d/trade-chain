@@ -15,6 +15,7 @@ export { default as UIProgress } from "./UIProgress.astro";
 export { default as UICard } from "./UICard.astro";
 export { default as UIInput } from "./UIFormInput.astro";
 export { default as UITooltip } from "./UITooltip.astro";
+export { default as UIList } from "./UIList.astro";
 
 /**
  * @interface
@@ -91,5 +92,10 @@ export const Components: ComponentMeta[] = [
 		name: "Tooltip",
 		description:
 			"Reusable tooltip component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "List",
+		description:
+			"Reusable list component with support for multiple styles and custom classes.",
 	},
 ];

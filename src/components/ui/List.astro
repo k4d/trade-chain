@@ -1,0 +1,78 @@
+---
+/* Component UI <List> */
+
+/**
+ * A reusable list component with support for dividers and borders.
+ *
+ * @component
+ * @example
+ * <List as="ol" divided bordered class="shadow-md">
+ *   <li>Step 1</li>
+ *   <li>Step 2</li>
+ * </List>
+ *
+ * @param {Object} props - Component props
+ * @param {'ul'|'ol'} [props.as='ul'] - HTML tag to use for the list
+ * @param {boolean} [props.divided=false] - Adds dividers between list items
+ * @param {boolean} [props.bordered=false] - Adds a border around the list
+ * @param {string} [props.class] - Optional custom Tailwind classes
+ */
+
+interface Props {
+	/**
+	 * The HTML tag to use for the list.
+	 * @default 'ul'
+	 */
+	as?: "ul" | "ol";
+
+	/**
+	 * If true, adds a border between list items.
+	 * @default false
+	 */
+	divided?: boolean;
+
+	/**
+	 * If true, adds a border around the list.
+	 * @default false
+	 */
+	bordered?: boolean;
+
+	/**
+	 * Optional custom Tailwind classes for styling the list.
+	 */
+	class?: string;
+}
+
+const {
+	as: Tag = "ul",
+	divided = false,
+	bordered = false,
+	class: className,
+} = Astro.props;
+
+/**
+ * The base classes for the list component.
+ */
+const baseClasses = "text-gray-700 bg-white rounded-lg";
+
+/**
+ * The classes for the list component when divided.
+ */
+const dividedClasses = divided ? "divide-y divide-gray-200" : "";
+
+/**
+ * The classes for the list component when bordered.
+ */
+const borderClasses = bordered ? "border border-gray-200" : "";
+
+/**
+ * The combined classes for the tooltip component.
+ */
+const combinedClasses = [baseClasses, dividedClasses, borderClasses, className]
+	.filter(Boolean)
+	.join(" ");
+---
+
+<Tag class={combinedClasses}>
+	<slot />
+</Tag>

@@ -1,0 +1,61 @@
+---
+import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
+import List from "@/components/ui/List.astro";
+import ListItem from "@/components/ui/ListItem.astro";
+---
+
+<UIKitGroup>
+	<List>
+		<ListItem>Cryptocurrencies</ListItem>
+		<ListItem>DexScan</ListItem>
+		<ListItem>Exchanges</ListItem>
+		<ListItem>Community</ListItem>
+		<ListItem>Products</ListItem>
+	</List>
+
+	<List bordered>
+		<ListItem>Cryptocurrencies</ListItem>
+		<ListItem>DexScan</ListItem>
+		<ListItem>Exchanges</ListItem>
+		<ListItem>Community</ListItem>
+		<ListItem>Products </ListItem>
+	</List>
+</UIKitGroup>
+
+<UIKitGroup
+	title="Numbered List (ol)"
+	description="Using the 'as' prop and 'divided' prop."
+>
+	<List as="ol" divided>
+		<ListItem>Step 1: Sign up</ListItem>
+		<ListItem>Step 2: Verify email</ListItem>
+		<ListItem>Step 3: Complete profile</ListItem>
+	</List>
+
+	<List as="ol" bordered divided>
+		<ListItem>Step 1: Sign up</ListItem>
+		<ListItem>Step 2: Verify email</ListItem>
+		<ListItem>Step 3: Complete profile</ListItem>
+	</List>
+</UIKitGroup>
+
+<UIKitGroup
+	title="Interactive List with Links"
+	description="Using the 'href' prop."
+>
+	<List>
+		<ListItem href="#">Home</ListItem>
+		<ListItem href="#" active> Dashboard (Active) </ListItem>
+		<ListItem href="#">Projects</ListItem>
+		<ListItem href="#">Contact</ListItem>
+		<ListItem href="#">About</ListItem>
+	</List>
+
+	<List bordered divided>
+		<ListItem href="#">Home</ListItem>
+		<ListItem href="#" active> Dashboard (Active) </ListItem>
+		<ListItem href="#">Projects</ListItem>
+		<ListItem href="#">Contact</ListItem>
+		<ListItem href="#">About</ListItem>
+	</List>
+</UIKitGroup>
