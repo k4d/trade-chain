@@ -1,0 +1,55 @@
+---
+/* Component UI <Modal> */
+
+/**
+ * A reusable modal component built on top of the Card component.
+ *
+ * @component
+ * @example
+ * <Modal title="Confirm Action" class="w-1/3">
+ *   <div slot="body">Are you sure you want to proceed?</div>
+ *   <div slot="footer">
+ *     <Button variant="danger">Yes</Button>
+ *     <Button variant="secondary">Cancel</Button>
+ *   </div>
+ * </Modal>
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.title] - Optional title shown in the header
+ * @param {string} [props.class] - Optional custom Tailwind classes (e.g., width, margin)
+ */
+
+import Card from "@/components/ui/Card.astro";
+
+/**
+ * Props for the Modal component.
+ */
+interface Props {
+	/**
+	 * Optional title shown in the header.
+	 */
+	title?: string;
+
+	/**
+	 * Optional custom Tailwind classes for container styling.
+	 */
+	class?: string;
+}
+
+const { title, class: className } = Astro.props;
+
+/**
+ * Base and combined container classes.
+ */
+const baseClasses = "shadow-lg";
+const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+---
+
+<Card title={title} class={combinedClasses}>
+	<div slot="body">
+		<slot name="body" />
+	</div>
+	<div slot="footer">
+		<slot name="footer" />
+	</div>
+</Card>

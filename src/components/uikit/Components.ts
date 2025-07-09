@@ -18,6 +18,7 @@ export { default as UITooltip } from "./UITooltip.astro";
 export { default as UIList } from "./UIList.astro";
 export { default as UITable } from "./UITable.astro";
 export { default as UIToast } from "./UIToast.astro";
+export { default as UIModal } from "./UIModal.astro";
 
 /**
  * @interface
@@ -109,5 +110,10 @@ export const Components: ComponentMeta[] = [
 		name: "Toast",
 		description:
 			"Reusable toast component with support for multiple styles and custom classes.",
+	},
+	{
+		name: "Modal",
+		description:
+			"Reusable modal component with support for multiple styles and custom classes.",
 	},
 ];
