@@ -1,24 +1,8 @@
 /**
  * UI Components
  *
- * This module re-exports all individual UI components used in the TradeChain UI Kit.
+ * This module exports the component map and metadata for the TradeChain UI Kit.
  */
-
-export { default as UITypography } from "./UITypography.astro";
-export { default as UILink } from "./UILink.astro";
-export { default as UINavLink } from "./UINavLink.astro";
-export { default as UIButton } from "./UIButton.astro";
-export { default as UIBadges } from "./UIBadges.astro";
-export { default as UIAlerts } from "./UIAlerts.astro";
-export { default as UISpinner } from "./UISpinner.astro";
-export { default as UIProgress } from "./UIProgress.astro";
-export { default as UICard } from "./UICard.astro";
-export { default as UIInput } from "./UIFormInput.astro";
-export { default as UITooltip } from "./UITooltip.astro";
-export { default as UIList } from "./UIList.astro";
-export { default as UITable } from "./UITable.astro";
-export { default as UIToast } from "./UIToast.astro";
-export { default as UIModal } from "./UIModal.astro";
 
 /**
  * @interface
@@ -28,7 +12,7 @@ export { default as UIModal } from "./UIModal.astro";
 export interface ComponentMeta {
 	/**
 	 * Name of the component (without the "UI" prefix)
-	 * @example 'Typography', 'Link', 'Button', 'Badges', 'Alerts', 'Spinner', 'Card'
+	 * @example 'Typography', 'Link', 'Button', 'Badges', 'Alerts', 'Spinner', 'Card', 'FormInput', 'Tooltip', 'List', 'Table', 'Toast', 'Modal'
 	 */
 	name: string;
 	/**
@@ -87,7 +71,7 @@ export const Components: ComponentMeta[] = [
 			"Reusable card component with support for multiple styles and custom classes.",
 	},
 	{
-		name: "Input",
+		name: "FormInput",
 		description:
 			"Reusable form input component with support for multiple styles and custom classes.",
 	},
