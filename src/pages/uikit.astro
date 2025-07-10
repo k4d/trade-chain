@@ -12,46 +12,44 @@ import Typography from "@/components/ui/Typography.astro";
 import UIKitBox from "@/components/uikit/UIKitBox.astro";
 
 import { Components } from "@/components/uikit/Components";
-import * as UIKitComponents from "@/components/uikit/Components";
-
-const ComponentType = UIKitComponents as Record<string, any>;
+import { getComponent } from "@/utils/uikit";
 
 const title =
-	"TradeChain UI Kit: Reusable Components, Typography, UI Patterns and UI  Guidelines";
+	"UI Kit: Reusable Components, Typography, UI Patterns and UI  Guidelines";
 ---
 
 <Layout title={title}>
-	<Typography variant="h2" class="text-gray-800">TradeChain UI Kit</Typography
-	>
+	<Typography variant="h2" class="text-gray-800">UI Kit</Typography>
 	<Typography variant="lead" class="text-gray-600">
 		Reusable Components, Typography, UI Patterns and UI Guidelines
 	</Typography>
 	{
-		Components.map((component) => {
-			const componentName = `UI${component.name}`;
-			const Component = ComponentType[componentName];
+		Promise.all(
+			Components.map(async (component) => {
+				const Component = await getComponent(`UI${component.name}`);
 
-			if (!Component) {
+				if (!Component) {
+					return (
+						<UIKitBox
+							title={component.name}
+							description={`No component found for "${component.name}"`}
+						>
+							<Typography variant="lead" class="text-red-500">
+								Component not implemented yet.
+							</Typography>
+						</UIKitBox>
+					);
+				}
+
 				return (
 					<UIKitBox
 						title={component.name}
-						description={`No component found for "${component.name}"`}
+						description={component.description}
 					>
-						<Typography variant="lead" class="text-red-500">
-							Component not implemented yet.
-						</Typography>
+						<Component {...Astro.props} />
 					</UIKitBox>
 				);
-			}
-
-			return (
-				<UIKitBox
-					title={component.name}
-					description={component.description}
-				>
-					<Component {...Astro.props} />
-				</UIKitBox>
-			);
-		})
+			}),
+		)
 	}
 </Layout>
