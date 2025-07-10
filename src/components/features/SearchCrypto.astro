@@ -1,0 +1,35 @@
+---
+/**
+ * Search bar component for searching cryptocurrencies.
+ *
+ * @component
+ * @example
+ * <SearchCrypto />
+ */
+
+import Typography from "@/components/ui/Typography.astro";
+import Card from "@/components/ui/Card.astro";
+import Input from "@/components/ui/form/Input.astro";
+import Button from "@/components/ui/Button.astro";
+
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+---
+
+<div class="flex justify-center">
+	<Card class="flex items-center justify-between space-x-4 w-1/2 shadow-lg">
+		<Typography variant="lead" class="text-gray-600"
+			>Search crypto</Typography
+		>
+		<div class="relative flex-grow">
+			<MagnifyingGlassIcon
+				className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2"
+			/>
+			<Input
+				type="text"
+				placeholder="Enter cryptocurrency name or symbol"
+				class="pl-12"
+			/>
+		</div>
+		<Button href="#" variant="gradient-blue" size="m">Search</Button>
+	</Card>
+</div>
