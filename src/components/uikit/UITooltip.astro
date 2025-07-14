@@ -1,31 +1,46 @@
 ---
+/* UIKit <Tooltip> component */
+
 import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
 import Button from "@/components/ui/Button.astro";
 ---
 
 <UIKitGroup>
-	<Tooltip text="Tooltip on top" variant="top">
+	<Tooltip text="Tooltip on top" position="top">
 		<Button href="#" variant="outline-primary" size="s"
 			>Tooltip on top</Button
 		>
 	</Tooltip>
 
-	<Tooltip text="Tooltip on bottom" variant="bottom">
+	<Tooltip text="Tooltip on bottom" position="bottom">
 		<Button href="#" variant="outline-primary" size="s"
 			>Tooltip on bottom</Button
 		>
 	</Tooltip>
 
-	<Tooltip text="Tooltip on left" variant="left">
+	<Tooltip text="Tooltip on left" position="left">
 		<Button href="#" variant="outline-primary" size="s"
 			>Tooltip on left</Button
 		>
 	</Tooltip>
 
-	<Tooltip text="Tooltip on right" variant="right">
+	<Tooltip text="Tooltip on right" position="right">
 		<Button href="#" variant="outline-primary" size="s"
 			>Tooltip on right</Button
+		>
+	</Tooltip>
+
+	<Tooltip position="right" class="bg-red-800">
+		<Button href="#" variant="outline-primary" size="s"
+			>Custom tooltip</Button
+		>
+		<span slot="content" class="text-red-200">Custom tooltip</span>
+	</Tooltip>
+
+	<Tooltip>
+		<Button href="#" variant="outline-primary" size="s"
+			>Tooltip is empty</Button
 		>
 	</Tooltip>
 </UIKitGroup>

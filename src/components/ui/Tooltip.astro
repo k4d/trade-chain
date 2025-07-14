@@ -6,68 +6,93 @@
  *
  * @component
  * @example
- * <Tooltip variant="bottom" class="max-w-xs">
- *   <span>Hover me</span>
- *   <template slot="default">This is a simple tooltip</template>
+ * <Tooltip position="top" text="Tooltip on top">
+ *   <button>Hover me</button>
  * </Tooltip>
  *
  * @param {Object} props - Component props
- * @param {'top'|'bottom'|'left'|'right'} [props.variant='top'] - Position of the tooltip relative to the element
- * @param {string} [props.class] - Optional custom Tailwind classes for container
+ * @param {string} [props.text] - The text to display in the tooltip
+ * @param {'top'|'bottom'|'left'|'right'} [props.position='top'] - Position of the tooltip
+ * @param {string} [props.class] - Additional Tailwind classes for the tooltip
+ * @param {string} [props.wrapperClass] - Additional Tailwind classes for the wrapper
  */
+
+import { cx } from "@utils/utils";
+
+/**
+ * Optional tooltip position.
+ */
+type Position = "top" | "bottom" | "left" | "right";
 
 interface Props {
 	/**
 	 * The text to display in the tooltip.
 	 */
-	text: string;
+	text?: string;
 
 	/**
 	 * The position of the tooltip relative to the element.
 	 * @default "top"
 	 */
-	variant?: "top" | "bottom" | "left" | "right";
+	position?: Position;
 
 	/**
-	 * Optional custom Tailwind classes for styling the tooltip or container
+	 * Optional custom Tailwind classes for styling the tooltip
 	 */
 	class?: string;
+
+	/**
+	 * Optional custom Tailwind classes for styling the wrapper
+	 */
+	wrapperClass?: string;
 }
 
-const { text, variant = "top", class: className } = Astro.props;
+const { text, position = "top", class: className, wrapperClass } = Astro.props;
 
 /**
- * The container classes for the tooltip component.
+ * Base wrapper classes.
  */
-const containerClasses = "relative inline-block group";
+const wrapperClasses = "relative inline-block group";
 
 /**
- * The base classes for the tooltip component.
+ * Combined wrapper classes.
+ */
+const combinedWrapperClasses = cx(wrapperClasses, wrapperClass);
+
+/**
+ * Base tooltip classes.
  */
 const baseClasses =
-	"absolute z-10 w-max max-w-xs px-2 py-1 text-xs font-light text-white bg-gray-700 rounded-sm shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 cursor-default";
+	"absolute z-10 w-max max-w-xs px-2 py-1 text-xs font-light text-white bg-gray-700 rounded-sm shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 delay-75 ease-out pointer-events-none";
 
 /**
- * Mapping from variant to positioning classes.
+ * Mapping positioning classes.
  */
-const variantClasses = {
+const positionClasses = {
 	top: "bottom-full left-1/2 -translate-x-1/2 mb-1",
 	bottom: "top-full left-1/2 -translate-x-1/2 mt-1",
 	left: "right-full top-1/2 -translate-y-1/2 mr-1",
 	right: "left-full top-1/2 -translate-y-1/2 ml-1",
-};
+} as const;
 
 /**
- * The combined classes for the tooltip component.
+ * Combined tooltip classes.
  */
-const combinedClasses = [baseClasses, variantClasses[variant]]
-	.filter(Boolean)
-	.join(" ");
+const combinedClasses = cx(baseClasses, positionClasses[position], className);
+
+/**
+ * Determine if tooltip has content.
+ */
+const hasContent = text || Astro.slots.has("content");
 ---
 
-<div class:list={[containerClasses, className]}>
+<div class={combinedWrapperClasses}>
 	<slot />
-	<div class={combinedClasses} role="tooltip">
-		{text}
-	</div>
+	{
+		hasContent && (
+			<div class={combinedClasses} role="tooltip">
+				{text ?? <slot name="content" />}
+			</div>
+		)
+	}
 </div>
