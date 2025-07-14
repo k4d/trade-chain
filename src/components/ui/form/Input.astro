@@ -26,6 +26,7 @@
 import type { HTMLAttributes } from "astro/types";
 import Label from "@/components/ui/form/Label.astro";
 import StatusText from "@/components/ui/form/InputStatusText.astro";
+import { cx } from "@/utils/cx";
 
 interface Props extends HTMLAttributes<"input"> {
 	/**
@@ -103,7 +104,7 @@ const {
 } = Astro.props;
 
 /**
- * Base input classes
+ * Base component classes.
  */
 const baseClasses =
 	"bg-white block w-full border rounded-md shadow-sm placeholder-gray-400 focus:outline-none";
@@ -132,9 +133,14 @@ const sizeClasses: Record<string, string> = {
 };
 
 /**
- * Combine all classes
+ * Combined component classes.
  */
-const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className || ""}`;
+const combinedClasses = cx(
+	baseClasses,
+	variantClasses[variant],
+	sizeClasses[size],
+	className || "",
+);
 
 /**
  * Determine ID or NAME for label binding

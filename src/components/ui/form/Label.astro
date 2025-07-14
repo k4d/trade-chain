@@ -17,6 +17,8 @@
  * @param {string} [props.class] - Optional Tailwind classes to override default styles
  */
 
+import { cx } from "@/utils/cx";
+
 interface Props {
 	/**
 	 * The text content of the label.
@@ -37,8 +39,15 @@ interface Props {
 
 const { title, for: forInput, class: className } = Astro.props;
 
+/**
+ * Base component classes.
+ */
 const baseClasses = "block mb-1 text-sm font-medium text-gray-700";
-const combinedClasses = `${baseClasses} ${className || ""}`;
+
+/**
+ * Combined component classes.
+ */
+const combinedClasses = cx(baseClasses, className || "");
 ---
 
 <label for={forInput} class={combinedClasses}>{title}</label>
