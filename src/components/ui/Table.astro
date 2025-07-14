@@ -9,18 +9,23 @@
  * <Table
  *   headers={["Name", "Price", "Volume", "Market Cap"]}
  *   rows={[
- *     ["Bitcoin", "$50000", "$1B", "$2100B"],
- *     ["Ethereum", "$3000", "$500M", "$210B"]
+ *     ["Bitcoin", "$110925", "$62,044,348,039", "$2.2T"],
+ *     ["Ethereum", "$2776", "$29,639,038,045", "$334.63B"],
+ *     ["XRP", "$2.44", "$5,291,313,135", "$144.59B"]
  *   ]}
  * />
  *
  * @param {Object} props - Component props
  * @param {string[]} props.headers - List of header titles
  * @param {string[][]} props.rows - 2D array of table data
- * @param {string} [props.class] - Optional custom Tailwind classes for the table container
+ * @param {string} [props.class] - Optional custom Tailwind classes for the table
+ * @param {string} [props.emptyText='No data available.'] - Text shown when no rows are present
+ * @param {boolean} [props.striped=false] - Adds alternating row background colors
  */
 
-type TableCell = string;
+import { cx } from "@utils/utils";
+
+type TableCell = string | number;
 
 interface Props {
 	/**
@@ -34,58 +39,96 @@ interface Props {
 	rows: TableCell[][];
 
 	/**
-	 * Optional custom Tailwind classes (e.g., positioning, max-width)
+	 * Optional custom Tailwind classes
 	 */
 	class?: string;
+
+	/**
+	 * Optional text shown when rows array is empty
+	 */
+	emptyText?: string;
+
+	/**
+	 * Optional boolean to enable striped rows
+	 */
+	striped?: boolean;
 }
 
-const { headers, rows, class: className } = Astro.props;
+const {
+	headers,
+	rows,
+	emptyText = "No data available.",
+	striped = false,
+	class: className,
+} = Astro.props;
 
 /**
- * Base classes for the table component
+ * Base wrapper classes.
+ */
+const wrapperClasses = "overflow-x-auto";
+
+/**
+ * Base table classes.
  */
 const baseClasses = "min-w-full divide-y divide-gray-200";
-const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+
+/**
+ * Combined table classes.
+ */
+const combinedClasses = cx(baseClasses, className);
 ---
 
-<table class={combinedClasses}>
-	<thead>
-		<tr>
-			{
-				headers.map((header: string) => (
-					<th
-						scope="col"
-						class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
-					>
-						{header}
-					</th>
-				))
-			}
-		</tr>
-	</thead>
+<div class={wrapperClasses}>
+	<table class={combinedClasses}>
+		<thead>
+			<tr>
+				{
+					headers.map((header: string) => (
+						<th
+							scope="col"
+							class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+						>
+							{header}
+						</th>
+					))
+				}
+			</tr>
+		</thead>
 
-	<tbody class="bg-white divide-y divide-gray-200">
-		{
-			rows.length > 0 ? (
-				rows.map((row, rowIndex) => (
+		<tbody class="bg-white divide-y divide-gray-200">
+			{
+				rows.length > 0 ? (
+					rows.map((row, rowIndex) => {
+						const isStriped = striped && rowIndex % 2 === 1;
+						return (
+							<tr
+								data-row-index={rowIndex}
+								class={isStriped ? "bg-gray-50" : ""}
+							>
+								{row.map((cell, cellIndex) => (
+									<td
+										data-cell-index={cellIndex}
+										class="px-6 py-4 whitespace-nowrap text-sm"
+									>
+										{typeof cell === "number"
+											? cell.toLocaleString()
+											: cell}
+									</td>
+								))}
+							</tr>
+						);
+					})
+				) : (
 					<tr>
-						{row.map((cell, cellIndex) => (
-							<td class="px-6 py-4 whitespace-nowrap text-sm">
-								{cell}
-							</td>
-						))}
+						<td
+							colspan={headers.length}
+							class="py-4 px-6 text-center text-gray-500"
+						>
+							{emptyText}
+						</td>
 					</tr>
-				))
-			) : (
-				<tr>
-					<td
-						colspan={headers.length}
-						class="py-4 px-6 text-center text-gray-500"
-					>
-						No data available.
-					</td>
-				</tr>
-			)
-		}
-	</tbody>
-</table>
+				)
+			}
+		</tbody>
+	</table>
+</div>

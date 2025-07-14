@@ -1,4 +1,6 @@
 ---
+/* UIKit <Table> component */
+
 import UIKitGroup from "@/components/uikit/UIKitGroup.astro";
 import Table from "@/components/ui/Table.astro";
 ---
@@ -7,11 +9,25 @@ import Table from "@/components/ui/Table.astro";
 	<Table
 		headers={["Name", "Price", "Volume", "Market Cap"]}
 		rows={[
-			["Bitcoin", "$50000", "$1B", "$2100B"],
-			["Ethereum", "$3000", "$500M", "$210B"],
-			["Cardano", "$1.5", "$50M", "$10B"],
-			["Solana", "$10", "$100M", "$1B"],
-			["Polkadot", "$5", "$50M", "$5B"],
+			["Bitcoin", "$110925", "$62,044,348,039", "$2.2T"],
+			["Ethereum", "$2776", "$29,639,038,045", "$334.63B"],
+			["XRP", "$2.44", "$5,291,313,135", "$144.59B"],
+			["BNB", "$670", "$93,328,035,268", "$93.3B"],
+			["Solana", "$157", "$84,279,067,995", "$84.27B"],
 		]}
+		emptyText="No market data yet."
+	/>
+
+	<Table
+		headers={["Name", "Price", "Volume", "Market Cap"]}
+		rows={[
+			["Bitcoin", "$110925", "$62,044,348,039", "$2.2T"],
+			["Ethereum", "$2776", "$29,639,038,045", "$334.63B"],
+			["XRP", "$2.44", "$5,291,313,135", "$144.59B"],
+			["BNB", "$670", "$93,328,035,268", "$93.3B"],
+			["Solana", "$157", "$84,279,067,995", "$84.27B"],
+		]}
+		striped
+		emptyText="No market data yet."
 	/>
 </UIKitGroup>
