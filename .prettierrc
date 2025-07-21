@@ -15,6 +15,7 @@
       "files": [
         ".prettierrc*",
         "eslint.config.*",
+        ".lintstagedrc.json",
         "*.config.js",
         "*.config.ts"
       ],
