@@ -13,6 +13,7 @@
     },
     {
       "files": [
+        "astro.config.mjs",
         ".prettierrc*",
         "eslint.config.*",
         ".lintstagedrc.json",
