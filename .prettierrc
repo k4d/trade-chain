@@ -1,0 +1,27 @@
+{
+  "plugins": ["prettier-plugin-astro"],
+  "useTabs": true,
+  "tabWidth": 4,
+
+  "overrides": [
+    {
+      "files": "package.json",
+      "options": {
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": [
+        ".prettierrc*",
+        "eslint.config.*",
+        "*.config.js",
+        "*.config.ts"
+      ],
+      "options": {
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}
