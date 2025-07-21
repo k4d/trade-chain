@@ -1,3 +1,4 @@
+// eslint.config.js
 import tseslint from "typescript-eslint";
 import astro from "eslint-plugin-astro";
 
@@ -8,15 +9,14 @@ export default tseslint.config(
   // Recommended rules for Astro
   ...astro.configs["flat/recommended"],
 
-  // I
+  // Ignore patterns
   {
-    ignores: ["dist/", ".astro/"],
+    ignores: ["dist/**", ".astro/**"],
   },
 
   // Override rules
   {
     rules: {
-      // You can add any rule overrides here
       "@typescript-eslint/no-unused-vars": "warn",
     },
   },
